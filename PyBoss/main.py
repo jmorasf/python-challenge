@@ -61,7 +61,7 @@ def stateShort(x):
 
 
 inputPath = os.path.join('Resources', 'employee_data.csv')          #csv file to read
-outputPath = os.path.join('Resources', 'employee_data_out.csv')     #csv file to write
+outputPath = os.path.join('Resources', 'employee_out.csv')          #csv file to write
 
 #double loop on output file and input file
 with open(outputPath, 'w', newline='') as csvNew:       

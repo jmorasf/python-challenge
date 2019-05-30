@@ -48,9 +48,6 @@ with open(csvpath, newline='') as csvfile:
        
 averageChanges = totalChanges/(totalMonths-1)
 
-txtpath = os.path.join('C:\Temp\PyBank\Resources', 'budget_results.txt')
-txtfile = open(txtpath,'w')
-
 print ("Financial Analysis")
 print ("----------------------------")
 print (f"Total Months: {totalMonths}")  
@@ -59,7 +56,7 @@ print (f"Average Change: {as_currency(averageChanges)}")   #print (f"Average Cha
 print (f"Greatest Increase in Profits: {greatestIncreaseMonth} {locale.currency(greatestIncreaseAmount,grouping=True)}")
 print (f"Greatest Decrease in Profits: {greatestDecreaseMonth} {locale.currency(greatestDecreaseAmount,grouping=True)}")
 
-txtpath = os.path.join('C:\Temp\PyBank\Resources', 'financial_data.txt')
+txtpath = os.path.join('Resources', 'budget_results.txt')
 txtfile = open(txtpath,'w')
 
 txtfile.write ("Financial Analysis")
