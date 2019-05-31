@@ -5,6 +5,7 @@ import locale
 locale.setlocale( locale.LC_ALL, '' )
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
+#this function formats the numbers with 2 decimals
 def as_currency(amount):
     if amount >= 0:
         return '${:,.2f}'.format(amount)
@@ -24,11 +25,8 @@ greatestDecreaseAmount = 0
 
 with open(csvpath, newline='') as csvfile:
 
-    # CSV reader specifies delimiter and variable that holds contents
-    csvreader = csv.reader(csvfile, delimiter=',')
-
-    # Read the header row first (skip this step if there is now header)
-    csv_header = next(csvreader)
+    csvreader = csv.reader(csvfile, delimiter=',')      #csv cursor initialization
+    csv_header = next(csvreader)                        #skip the first line
 
     # Read each row of data after the header
     for row in csvreader:
@@ -38,7 +36,7 @@ with open(csvpath, newline='') as csvfile:
         if previousProfit != None:
             changes = profit - previousProfit
             totalChanges += changes
-        previousProfit = profit  
+        previousProfit = profit                         #set previousProfit at the end of the loop calculation
         if changes > greatestIncreaseAmount:
             greatestIncreaseAmount = changes
             greatestIncreaseMonth = row[0]
@@ -46,13 +44,13 @@ with open(csvpath, newline='') as csvfile:
             greatestDecreaseAmount = changes
             greatestDecreaseMonth = row[0]
        
-averageChanges = totalChanges/(totalMonths-1)
+averageChanges = totalChanges/(totalMonths-1)           #we can only calculate the difference for one month less
 
 print ("Financial Analysis")
 print ("----------------------------")
 print (f"Total Months: {totalMonths}")  
 print (f"Total: {locale.currency(netProfit,grouping=True)}")
-print (f"Average Change: {as_currency(averageChanges)}")   #print (f"Average Change: {locale.currency(averageChanges,grouping=True)}") (using locale library)
+print (f"Average Change: {as_currency(averageChanges)}")   #this one printed using the function
 print (f"Greatest Increase in Profits: {greatestIncreaseMonth} {locale.currency(greatestIncreaseAmount,grouping=True)}")
 print (f"Greatest Decrease in Profits: {greatestDecreaseMonth} {locale.currency(greatestDecreaseAmount,grouping=True)}")
 
